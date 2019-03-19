@@ -10,7 +10,9 @@ module.exports = merge(common, {
     chunkFilename: 'js/[name].chunk.js'
   },
   devServer: {
-    inline: true
+    port: 4200,
+    inline: true,
+    overlay: true
   },
   plugins: [
     new Webpack.DefinePlugin({
@@ -19,20 +21,6 @@ module.exports = merge(common, {
   ],
   module: {
     rules: [
-      {
-        test: /\.(js)$/,
-        include: Path.resolve(__dirname, '../src'),
-        enforce: 'pre',
-        loader: 'eslint-loader',
-        options: {
-          emitWarning: true,
-        }
-      },
-      {
-        test: /\.(js)$/,
-        include: Path.resolve(__dirname, '../src'),
-        loader: 'babel-loader'
-      },
       {
         test: /\.s?css$/i,
         use: ['style-loader', 'css-loader?sourceMap=true', 'sass-loader']

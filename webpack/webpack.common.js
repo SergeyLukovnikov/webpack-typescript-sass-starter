@@ -35,15 +35,23 @@ module.exports = {
   module: {
     rules: [
       {
-        enforce: 'pre',
         test: /\.ts$/,
+        enforce: 'pre',
         exclude: /node_modules/,
         loader: 'tslint-loader'
       },
       {
-        test: /\.tsx?$/,
+        test: /\.(js)$/,
+        enforce: 'pre',
         include: Path.resolve(__dirname, '../src'),
-        loader: "ts-loader",
+        loader: 'eslint-loader',
+        options: {
+          emitWarning: true,
+        }
+      },
+      {
+        test: /\.tsx?$/,
+        loaders: ['babel-loader', 'ts-loader'],
       },
       {
         test: /\.mjs$/,
